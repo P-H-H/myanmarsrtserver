@@ -6,8 +6,7 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "seed": "node seed/seed.js",
-    "seed:redeem": "node seed/redeem.seed.js",
-    "build": "cd ../client && npm i && npm run build"
+    "seed:redeem": "node seed/redeem.seed.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
