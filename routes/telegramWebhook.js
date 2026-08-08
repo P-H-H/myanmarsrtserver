@@ -62,7 +62,7 @@ router.post('/webhook', async (req, res) => {
       }
 
       payment.status = 'rejected';
-      payment.adminReason = 'Rejected via Telegram'; // နောက်မှ DB မှာ ပြင်
+      payment.adminReason = 'Rejected'; // နောက်မှ DB မှာ ပြင်
       await payment.save();
 
       if (bot) {
