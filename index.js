@@ -92,34 +92,7 @@ if(fs.existsSync(clientDist)){
   app.get('*', (req,res)=> res.sendFile(path.join(clientDist,'index.html')));
 }
 
-let cached = global.mongoose;
-if (!cached) cached = global.mongoose = { conn: null, promise: null };
-
-async function connectDB() {
-  if (cached.conn) return cached.conn;
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(process.env.MONGODB_URI, {
-      bufferCommands: false,
-    }).then((m) => m);
-  }
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
-
-// Local dev မှာ listen၊ Vercel မှာ export ပဲ
-if (!process.env.VERCEL) {
-  connectDB().then(() => {
-    console.log('MongoDB connected');
-    app.listen(PORT, '0.0.0.0', () =>
-      console.log(`Server running on http://0.0.0.0:${PORT}`)
-    );
-  }).catch((e) => {
-    console.error(e);
-    process.exit(1);
-  });
-} else {
-  // Vercel: connect ကို request မတိုင်ခင် ကြိုလုပ်
-  await connectDB();
-}
-
-export default app;
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
+  console.log('MongoDB connected');
+  app.listen(PORT, '0.0.0.0', ()=>console.log(`Server running on http://0.0.0.0:${PORT}`));
+}).catch(e=>{ console.error(e); process.exit(1); });
