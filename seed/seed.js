@@ -56,13 +56,26 @@ async function seed(){
   if(!settings){
     settings = await Settings.create({
       paymentMethod: 'KPay',
+      initialCharacters: 40000,
       kpayNumber: '09912345678',
       kpayName: 'Myanmar Subtitle Admin',
-      geminiModel: 'gemini-3.1-flash-lite',
+      geminiModel: 'gemini-2.0-flash-lite',
+      transcribeModel: 'gemini-2.0-flash',
       tiktokUrl: 'https://www.tiktok.com/@your_admin_tiktok',
       announcement: { active: false, text: '', type: 'info' },
       event: { active: false, discountPercent: 0, bannerText: '' }
     });
+  }
+  // Ensure transcribeModel exists on older deployments
+  if (!settings.transcribeModel) {
+    settings.transcribeModel = 'gemini-2.0-flash';
+    await settings.save();
+    console.log('Added transcribeModel field');
+  }
+  if (settings.initialCharacters == null) {
+    settings.initialCharacters = 40000;
+    await settings.save();
+    console.log('Added initialCharacters field');
   }
   console.log('Settings ready:', settings.kpayNumber);
 

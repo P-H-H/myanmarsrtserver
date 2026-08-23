@@ -42,7 +42,9 @@ router.get("/", async (req, res) => {
       number: settings?.kpayNumber,
       name: settings?.kpayName,
     },
+    // Separate models – client picks the right one for each job
     geminiModel: settings?.geminiModel || "gemini-3.1-flash-lite",
+    transcribeModel: settings?.transcribeModel || "gemini-3.5-flash",
     tiktokUrl: settings?.tiktokUrl || "",
   });
 });
