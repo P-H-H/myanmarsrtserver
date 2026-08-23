@@ -6,7 +6,8 @@ const SettingsSchema = new mongoose.Schema({
   kpayName: { type: String, default: 'Myanmar Subtitle' },
   initialCharacters: { type: Number, default: 40000 },
   geminiModel: { type: String, default: 'gemini-3.1-flash-lite' },
-  transcribeModel: { type: String, default: 'gemini-3.5-flash' },
+  reviewModel: { type: String, default: 'gemini-3.1-flash-lite' },
+  groqModel: { type: String, default: 'whisper-large-v3-turbo' },
   tiktokUrl: { type: String, default: '' },
   announcement: {
     active: { type: Boolean, default: false },

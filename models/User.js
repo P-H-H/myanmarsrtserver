@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   charactersUsed: { type: Number, default: 0 },
   totalPurchased: { type: Number, default: 0 },
   geminiApiKeyEncrypted: { type: String, default: '' },
+  groqApiKeyEncrypted: { type: String, default: '' },
   lastRedeemAt: Date
 }, { timestamps: true });
 

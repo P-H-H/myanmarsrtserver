@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get('/me', auth, async (req, res) => {
   const user = req.user;
-  const hasKey = !!user.geminiApiKeyEncrypted;
   res.json({
     id: user._id,
     email: user.email,
@@ -15,7 +14,8 @@ router.get('/me', auth, async (req, res) => {
     charactersBalance: user.charactersBalance,
     charactersUsed: user.charactersUsed,
     totalPurchased: user.totalPurchased,
-    hasGeminiKey: hasKey,
+    hasGeminiKey: !!user.geminiApiKeyEncrypted,
+    hasGroqKey: !!user.groqApiKeyEncrypted,
     role: user.role,
   });
 });
@@ -34,9 +34,28 @@ router.delete('/gemini-key', auth, async (req, res) => {
   res.json({ success: true });
 });
 
-/** Owner-only: return full decrypted key for client-side translation (BYOK) */
 router.get('/gemini-key', auth, async (req, res) => {
   const key = decrypt(req.user.geminiApiKeyEncrypted);
+  if (!key) return res.status(404).json({ error: 'No key saved' });
+  res.json({ apiKey: key });
+});
+
+router.post('/groq-key', auth, async (req, res) => {
+  const { apiKey } = req.body;
+  if (!apiKey || apiKey.length < 10) return res.status(400).json({ error: 'Invalid key' });
+  req.user.groqApiKeyEncrypted = encrypt(apiKey.trim());
+  await req.user.save();
+  res.json({ success: true, hasGroqKey: true });
+});
+
+router.delete('/groq-key', auth, async (req, res) => {
+  req.user.groqApiKeyEncrypted = '';
+  await req.user.save();
+  res.json({ success: true });
+});
+
+router.get('/groq-key', auth, async (req, res) => {
+  const key = decrypt(req.user.groqApiKeyEncrypted);
   if (!key) return res.status(404).json({ error: 'No key saved' });
   res.json({ apiKey: key });
 });
