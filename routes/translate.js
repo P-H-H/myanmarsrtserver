@@ -13,7 +13,8 @@ router.post('/prepare', auth, async (req, res) => {
       return res.status(400).json({ error: 'Text required' });
     }
 
-    const characters = text.length;
+    const multiplier = Math.max(1, Math.min(50, Number(req.body.multiplier) || 1));
+    const characters = text.length * multiplier;
     if (characters < 1) {
       return res.status(400).json({ error: 'Empty text' });
     }

@@ -42,6 +42,7 @@ router.get("/", async (req, res) => {
       number: settings?.kpayNumber,
       name: settings?.kpayName,
     },
+    contentWriterMultiplier: settings?.contentWriterMultiplier ?? 10,
     geminiModel: settings?.geminiModel || "gemini-3.1-flash-lite",
     reviewModel: settings?.reviewModel || "gemini-3.1-flash-lite",
     groqModel: settings?.groqModel || "whisper-large-v3-turbo",
