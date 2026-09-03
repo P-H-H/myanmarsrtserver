@@ -8,6 +8,7 @@ const SettingsSchema = new mongoose.Schema(
     initialCharacters: { type: Number, default: 40000 },
     geminiModel: { type: String, default: "gemini-3.1-flash-lite" },
     reviewModel: { type: String, default: "gemini-3.1-flash-lite" },
+    recapModel: { type: String, default: "gemini-3.1-flash-lite" },
     groqModel: { type: String, default: "whisper-large-v3-turbo" },
     tiktokUrl: { type: String, default: "" },
     adminEmail: { type: String, default: "" },
@@ -16,7 +17,8 @@ const SettingsSchema = new mongoose.Schema(
       text: { type: String, default: "" },
       type: { type: String, default: "info" },
     },
-    contentWriterMultiplier: { type: Number, default: 10 },
+    contentWriterMultiplier: { type: Number, default: 8 },
+    recapMultiplier: { type: Number, default: 8 },
     event: {
       active: { type: Boolean, default: false },
       discountPercent: { type: Number, default: 0 },

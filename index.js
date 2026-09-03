@@ -16,6 +16,7 @@ import redeemRoute from "./routes/redeem.js";
 import paymentRoute from "./routes/payment.js";
 import telegramWebhook from "./routes/telegramWebhook.js";
 import guideRoute from "./routes/guide.js";
+import ttsRoute from "./routes/tts.js";
 
 dotenv.config();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -88,6 +89,7 @@ app.use("/api/redeem", redeemRoute);
 app.use("/api/payment", paymentRoute);
 app.use("/api/telegram", telegramWebhook);
 app.use("/api/guide", guideRoute);
+app.use("/api/tts", ttsRoute);
 
 // Serve client in production
 const clientDist = path.join(__dirname, "../client/dist");
