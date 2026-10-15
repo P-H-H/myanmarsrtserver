@@ -18,9 +18,9 @@
     "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0",
+    "msedge-tts": "^2.1.0",
     "multer": "^1.4.5-lts.1",
-    "node-telegram-bot-api": "^1.2.0",
-    "msedge-tts": "^2.0.2"
+    "node-telegram-bot-api": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

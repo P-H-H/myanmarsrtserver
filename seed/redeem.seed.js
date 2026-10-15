@@ -5,7 +5,7 @@ dotenv.config();
 
 // edit → run: npm run seed:redeem
 const codes = [
-  { code: 'TIKTOK50K', characters: 30000, maxUses: 100, days: 30 },
+  { code: 'APPLE', characters: 8000, maxUses: 100, days: 30 },
   // { code: 'WELCOME10K', characters: 10000, maxUses: 500, days: 60 },
 ];
 
